@@ -6,8 +6,10 @@ const Wrapper = styled.article`
   box-shadow: rgba(184, 194, 215, 0.25) 0 4px 6px,
     rgba(184, 194, 215, 0.1) 0 5px 7px;
   color: #2e3440;
+  height: fit-content;
   max-width: 320px;
   padding: 24px;
+  width: 100%;
 
   & > p {
     &:first-child {
