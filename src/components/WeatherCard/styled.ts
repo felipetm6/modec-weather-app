@@ -162,7 +162,15 @@ const Wrapper = styled.article<WrapperProps>`
   ${({ collapsed }) =>
     collapsed &&
     css`
+      box-shadow: rgba(184, 194, 215, 0.1) 0 3px 4px,
+        rgba(184, 194, 215, 0.1) 0 3px 7px;
       max-width: 220px;
+      transition: box-shadow 0.2s;
+
+      &:hover {
+        box-shadow: rgba(184, 194, 215, 0.25) 0 4px 6px,
+          rgba(184, 194, 215, 0.1) 0 5px 7px;
+      }
 
       @media (min-width: 830px) {
         max-width: 220px;

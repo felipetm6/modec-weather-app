@@ -6,6 +6,7 @@ import WeatherCard from 'components/WeatherCard';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { DEFAULT_COORDINATES } from 'utils/constants';
 import { AppIcon } from 'utils/images';
+import Loader from '../../components/Loader';
 
 type LatLng = {
   lat: number;
@@ -113,7 +114,9 @@ const Main: FC = () => {
               windSpeed={selectedCityForecast.wind.speed}
             />
           ) : (
-            <Styled.BlankCard />
+            <Styled.BlankCard>
+              <Loader />
+            </Styled.BlankCard>
           )}
           <Styled.SearchButton
             onClick={getForecastByNavigator}

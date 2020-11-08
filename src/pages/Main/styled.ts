@@ -47,15 +47,27 @@ const SearchButton = styled.button`
   background-color: #88c9e0;
   border: none;
   border-radius: 4px;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
   color: #445262;
   cursor: pointer;
   display: block;
   font-size: 16px;
   margin: 16px auto;
   padding: 8px 16px;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: #78bac6;
+  }
+
+  &:active {
+    background-color: #6bb1c4;
+  }
 
   &:disabled {
     background-color: #d8dee9;
+    box-shadow: none;
     cursor: default;
   }
 `;
@@ -107,13 +119,16 @@ const MainArea = styled.section`
 `;
 
 const BlankCard = styled(WeatherCardStyled.Wrapper)`
+  align-items: center;
   background-color: #d8dee9;
+  box-shadow: none;
   display: none;
-  height: 315px;
-  width: 346px;
+  height: 235px;
+  justify-content: center;
+  width: 300px;
 
   @media (min-width: 560px) {
-    display: block;
+    display: flex;
   }
 `;
 
