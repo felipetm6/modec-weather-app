@@ -2,6 +2,7 @@ import { WeatherCardStyled } from 'components/WeatherCard/styled';
 import styled from 'styled-components';
 
 const Wrapper = styled.main`
+  min-height: 72vh;
   padding: 80px 24px;
 `;
 
