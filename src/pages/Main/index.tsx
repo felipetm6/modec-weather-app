@@ -7,6 +7,7 @@ import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { DEFAULT_COORDINATES } from 'utils/constants';
 import { AppIcon } from 'utils/images';
 import Loader from 'components/Loader';
+import Toast from 'components/Toast';
 
 type LatLng = {
   lat: number;
@@ -20,19 +21,29 @@ const Main: FC = () => {
     selectedCityForecast,
     setSelectedCityForecast,
   ] = useState<OpenWeatherData | null>(null);
+  const [errors, setErrors] = useState<string[]>([]);
 
   const getForecastByNavigator = async () => {
     if (!coordinates) {
       return;
     }
 
-    const { list } = await getForecastByCoordinates(
-      coordinates.lat,
-      coordinates.lng,
-    );
+    try {
+      const { list } = await getForecastByCoordinates(
+        coordinates.lat,
+        coordinates.lng,
+      );
 
-    setSelectedCityForecast(list[0]);
-    setForecastList([...list.slice(1)]);
+      setSelectedCityForecast(list[0]);
+      setForecastList([...list.slice(1)]);
+    } catch (e) {
+      console.error(e);
+
+      setErrors([
+        ...errors,
+        'There was a problem fetching the weather. Are you sure you set all API keys properly?',
+      ]);
+    }
   };
 
   const updateCoordinates = (event: {
@@ -59,6 +70,10 @@ const Main: FC = () => {
     setSelectedCityForecast(forecast);
   };
 
+  const onToastExit = (message: string) => () => {
+    setErrors(errors.filter((error) => error !== message));
+  };
+
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -66,7 +81,10 @@ const Main: FC = () => {
         setCoordinates({ lat: coords.latitude, lng: coords.longitude });
       });
     } else {
-      console.error('Duh');
+      setErrors([
+        ...errors,
+        'Your browser is not able to provide your location. Please select a location on the map.',
+      ]);
     }
   }, []);
 
@@ -149,6 +167,14 @@ const Main: FC = () => {
           />
         ))}
       </Styled.CitiesContainer>
+
+      <Styled.ToastHandler>
+        {errors.map((error, i) => (
+          <Toast onExit={onToastExit(error)} key={i}>
+            {error}
+          </Toast>
+        ))}
+      </Styled.ToastHandler>
     </Styled.Wrapper>
   );
 };

@@ -17,10 +17,7 @@ type BulkOpenWeatherResponse = {
 export const getForecastByCoordinates = async (
   latitude: number,
   longitude: number,
-): Promise<BulkOpenWeatherResponse> => {
-  const response = await createOpenWeatherRequest(
+): Promise<BulkOpenWeatherResponse> =>
+  await createOpenWeatherRequest(
     `find?lat=${latitude}&lon=${longitude}&cnt=15`,
   );
-
-  return response;
-};

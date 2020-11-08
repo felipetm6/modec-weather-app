@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const Wrapper = styled.main`
   min-height: 72vh;
   padding: 80px 24px;
+  position: relative;
 `;
 
 const Title = styled.h1`
@@ -156,6 +157,14 @@ const CitiesContainer = styled.section`
   }
 `;
 
+const ToastHandler = styled.div`
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 80px;
+  z-index: 1;
+`;
+
 export const MainStyled = {
   BlankCard,
   CitiesContainer,
@@ -163,5 +172,6 @@ export const MainStyled = {
   SearchButton,
   Subtitle,
   Title,
+  ToastHandler,
   Wrapper,
 };
