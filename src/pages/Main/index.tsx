@@ -1,5 +1,3 @@
-/// <reference types="googlemaps" />
-
 import React, { FC, useEffect, useState } from 'react';
 import { MainStyled as Styled } from './styled';
 import { getForecastByCoordinates } from 'api/weather';
@@ -36,7 +34,9 @@ const Main: FC = () => {
     setForecastList([...list.slice(1)]);
   };
 
-  const updateCoordinates = (event: google.maps.MouseEvent) => {
+  const updateCoordinates = (event: {
+    latLng: { lat(): number; lng(): number };
+  }) => {
     const { latLng } = event;
 
     setCoordinates({ lat: latLng.lat(), lng: latLng.lng() });
