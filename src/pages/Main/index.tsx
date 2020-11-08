@@ -7,6 +7,7 @@ import { OpenWeatherData } from 'models/weather';
 import WeatherCard from 'components/WeatherCard';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { DEFAULT_COORDINATES } from 'utils/constants';
+import { AppIcon } from 'utils/images';
 
 type LatLng = {
   lat: number;
@@ -70,7 +71,10 @@ const Main: FC = () => {
 
   return (
     <Styled.Wrapper>
-      <Styled.Title>Awesome Weather App</Styled.Title>
+      <Styled.Title>
+        <AppIcon />
+        Awesome Weather App
+      </Styled.Title>
       <Styled.Subtitle>
         Select a place on the map and click Search to check nearby forecasts!
       </Styled.Subtitle>
@@ -126,7 +130,7 @@ const Main: FC = () => {
 
       <Styled.CitiesContainer>
         {forecastList.length ? (
-          <p>Forecasts over this region</p>
+          <p>Forecasts in this region</p>
         ) : (
           <p>Waiting for city selection...</p>
         )}

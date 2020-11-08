@@ -64,7 +64,7 @@ const WeatherCard: FC<Props> = ({
       {!onClick && (
         <Styled.AdditionalData>
           <Styled.AdditionalDataEntry>
-            <p>Sensation</p>
+            <p>Feels like</p>
             <p>{thermalSensation.toFixed(0)}°</p>
           </Styled.AdditionalDataEntry>
           <Styled.AdditionalDataEntry>

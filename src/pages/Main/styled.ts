@@ -11,6 +11,13 @@ const Title = styled.h1`
   margin-bottom: 36px;
   margin-top: 0;
   text-align: center;
+
+  svg {
+    fill: #434c5e;
+    height: 36px;
+    margin-right: 24px;
+    width: 36px;
+  }
 `;
 
 const Subtitle = styled.p`
