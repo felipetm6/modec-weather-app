@@ -1,6 +1,30 @@
-# Getting Started with Create React App
+# Awesome Weather App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), with the intent to fulfill
+a job's hard skill challenge to work as a React Developer for **Modec**.  
+
+The project was developed with **React** and **Typescript**, using both **OpenWeatherMap API** and **Google 
+Maps** to fetch locations and their current weather. The purpose of the challenge is to 
+fetch the current weather in a city based on latitude and longitude, and display this
+ information alongside 14 other cities.
+
+It is necessary to provide the necessary API keys to execute this project as expected. Create a `.env` file in your root repository after cloning this project and setup the following keys:
+
+```
+REACT_APP_GOOGLE_MAPS_KEY=(with your Google Maps API key inserted here)
+REACT_APP_WEATHER_API_KEY=(with your OpenWeatherMap API key inserted here)
+```
+
+## Content of this project
+
+The aforementioned challenge was completed using the following technologies:
+
+- **React**, as a basic request for the challenge;
+- **TypeScript**, to ensure type safety and provide better control over the whole code;
+- **Styled Components**, to provide an easier and compartmentalized way to style the project;
+- **OpenWeatherMap**, as a basic request for the challenge, to provide the data related to a city's weather in real time;
+- **Google Maps**, as a solution for the requested map, to provide a way for the user to select which city to fetch weather data;
+- **Nord Theme**, to provide a visual guide over colors and overall styles;
 
 ## Available Scripts
 
@@ -38,9 +62,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
