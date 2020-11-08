@@ -84,10 +84,6 @@ const Main: FC = () => {
           googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_KEY || ''}
         >
           <GoogleMap
-            mapContainerStyle={{
-              height: '400px',
-              width: '400px',
-            }}
             center={coordinates || DEFAULT_COORDINATES}
             clickableIcons={false}
             onClick={updateCoordinates}

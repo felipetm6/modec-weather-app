@@ -7,21 +7,34 @@ type WrapperProps = {
 
 const LocationName = styled.h2`
   color: #88c0d0;
-  font-size: 24px;
+  font-size: 20px;
   margin-top: 8px;
+
+  @media (min-width: 830px) {
+    font-size: 24px;
+  }
 `;
 
 const MainSection = styled.section`
   display: grid;
   grid-template-areas: 'icon temperature' '. description';
   grid-template-columns: 40% 70%;
-  grid-template-rows: 75px auto;
+  grid-template-rows: 55px auto;
+
+  @media (min-width: 830px) {
+    grid-template-rows: 75px auto;
+  }
 
   & > p {
+    font-size: 14px;
     font-weight: bold;
     grid-area: description;
-    margin: 0;
+    margin: 0 0 0 8px;
     text-transform: capitalize;
+
+    @media (min-width: 830px) {
+      font-size: 16px;
+    }
   }
 `;
 
@@ -33,8 +46,13 @@ const TemperatureIcon = styled.div`
 
   & > svg {
     fill: #4c566a;
-    height: 90px;
-    width: 90px;
+    height: 60px;
+    width: 60px;
+
+    @media (min-width: 830px) {
+      height: 90px;
+      width: 90px;
+    }
   }
 `;
 
@@ -44,9 +62,13 @@ const TemperatureSection = styled.div`
 `;
 
 const CurrentTemperature = styled.p`
-  font-size: 60px;
+  font-size: 50px;
   font-weight: bold;
   margin: 0;
+
+  @media (min-width: 830px) {
+    font-size: 60px;
+  }
 `;
 
 const TemperatureForecast = styled.div`
@@ -56,10 +78,22 @@ const TemperatureForecast = styled.div`
   & > p {
     align-items: flex-end;
     display: flex;
+    font-size: 14px;
     margin: 0;
 
+    @media (min-width: 830px) {
+      font-size: 16px;
+    }
+
     & > svg {
+      height: 20px;
       margin-right: 4px;
+      width: 20px;
+
+      @media (min-width: 830px) {
+        height: 24px;
+        width: 24px;
+      }
     }
 
     &:first-child {
@@ -83,11 +117,11 @@ const AdditionalData = styled.section`
   display: flex;
   flex: 1 0 23%;
   justify-content: space-between;
+  margin: 20px 0 0;
 `;
 
 const AdditionalDataEntry = styled.div`
   font-size: 13px;
-  margin: 20px 0;
 
   & > p {
     margin: 0;
@@ -106,22 +140,32 @@ const Wrapper = styled.article<WrapperProps>`
     rgba(184, 194, 215, 0.1) 0 5px 7px;
   color: #2e3440;
   cursor: ${({ clickable }) => (clickable ? 'pointer' : 'default')};
+  flex-grow: 0;
+  flex-shrink: 0;
   height: fit-content;
-  max-width: 320px;
+  max-width: 270px;
   padding: 24px;
   width: 100%;
+
+  @media (min-width: 830px) {
+    max-width: 320px;
+  }
+
+  & > p {
+    &:first-child {
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
 
   ${({ collapsed }) =>
     collapsed &&
     css`
       max-width: 220px;
 
-      & > p {
-        &:first-child {
-          font-size: 12px;
-          font-weight: bold;
-          text-transform: uppercase;
-        }
+      @media (min-width: 830px) {
+        max-width: 220px;
       }
 
       ${LocationName} {
