@@ -16,6 +16,10 @@ type LatLng = {
 const Main: FC = () => {
   const [coordinates, setCoordinates] = useState<LatLng | null>(null);
   const [forecastList, setForecastList] = useState<OpenWeatherData[]>([]);
+  const [
+    selectedCityForecast,
+    setSelectedCityForecast,
+  ] = useState<OpenWeatherData | null>(null);
 
   const getForecastByNavigator = async () => {
     if (!coordinates) {
@@ -27,13 +31,30 @@ const Main: FC = () => {
       coordinates.lng,
     );
 
-    setForecastList([...list]);
+    setSelectedCityForecast(list[0]);
+    setForecastList([...list.slice(1)]);
   };
 
   const updateCoordinates = (event: google.maps.MouseEvent) => {
     const { latLng } = event;
 
     setCoordinates({ lat: latLng.lat(), lng: latLng.lng() });
+  };
+
+  const setAsSelectedCity = (forecast: OpenWeatherData) => () => {
+    const {
+      coord: { lat, lon: lng },
+    } = forecast;
+
+    if (selectedCityForecast) {
+      setForecastList([
+        { ...selectedCityForecast },
+        ...forecastList.filter((item) => item.name !== forecast.name),
+      ]);
+    }
+
+    setCoordinates({ lat, lng });
+    setSelectedCityForecast(forecast);
   };
 
   useEffect(() => {
@@ -45,7 +66,7 @@ const Main: FC = () => {
     } else {
       console.error('Duh');
     }
-  }, [getForecastByNavigator]);
+  }, []);
 
   return (
     <Styled.Wrapper>
@@ -75,43 +96,56 @@ const Main: FC = () => {
             {coordinates && (
               <Marker position={coordinates || DEFAULT_COORDINATES} />
             )}
-            {coordinates && (
-              <Styled.SearchButton onClick={getForecastByNavigator}>
-                Search
-              </Styled.SearchButton>
-            )}
           </GoogleMap>
         </LoadScript>
 
-        {forecastList[0] && (
-          <WeatherCard
-            {...forecastList[0].main}
-            name={forecastList[0].name}
-            currentTemperature={forecastList[0].main.temp}
-            description={forecastList[0].weather[0].description}
-            iconCode={forecastList[0].weather[0].icon}
-            temperatureMaximum={forecastList[0].main.temp_max}
-            temperatureMinimum={forecastList[0].main.temp_min}
-            thermalSensation={forecastList[0].main.feels_like}
-            windSpeed={forecastList[0].wind.speed}
-          />
-        )}
+        <div>
+          {selectedCityForecast ? (
+            <WeatherCard
+              {...selectedCityForecast.main}
+              name={selectedCityForecast.name}
+              currentTemperature={selectedCityForecast.main.temp}
+              description={selectedCityForecast.weather[0].description}
+              iconCode={selectedCityForecast.weather[0].icon}
+              temperatureMaximum={selectedCityForecast.main.temp_max}
+              temperatureMinimum={selectedCityForecast.main.temp_min}
+              thermalSensation={selectedCityForecast.main.feels_like}
+              windSpeed={selectedCityForecast.wind.speed}
+            />
+          ) : (
+            <Styled.BlankCard />
+          )}
+          <Styled.SearchButton
+            onClick={getForecastByNavigator}
+            disabled={!coordinates}
+          >
+            Search
+          </Styled.SearchButton>
+        </div>
       </Styled.MainArea>
 
-      {forecastList.slice(1).map((item, i) => (
-        <WeatherCard
-          {...item.main}
-          name={item.name}
-          currentTemperature={item.main.temp}
-          description={item.weather[0].description}
-          iconCode={item.weather[0].icon}
-          temperatureMaximum={item.main.temp_max}
-          temperatureMinimum={item.main.temp_min}
-          thermalSensation={item.main.feels_like}
-          windSpeed={item.wind.speed}
-          key={i}
-        />
-      ))}
+      <Styled.CitiesContainer>
+        {forecastList.length ? (
+          <p>Forecasts over this region</p>
+        ) : (
+          <p>Waiting for city selection...</p>
+        )}
+        {forecastList.map((item, i) => (
+          <WeatherCard
+            {...item.main}
+            onClick={setAsSelectedCity(item)}
+            name={item.name}
+            currentTemperature={item.main.temp}
+            description={item.weather[0].description}
+            iconCode={item.weather[0].icon}
+            temperatureMaximum={item.main.temp_max}
+            temperatureMinimum={item.main.temp_min}
+            thermalSensation={item.main.feels_like}
+            windSpeed={item.wind.speed}
+            key={i}
+          />
+        ))}
+      </Styled.CitiesContainer>
     </Styled.Wrapper>
   );
 };

@@ -26,26 +26,69 @@ const SearchButton = styled.button`
   border-radius: 4px;
   color: #445262;
   cursor: pointer;
+  display: block;
   font-size: 16px;
-  position: absolute;
-  right: 16px;
-  top: 16px;
+  margin: 16px auto;
+  padding: 8px 16px;
+
+  &:disabled {
+    background-color: #d8dee9;
+    cursor: default;
+  }
 `;
 
 const MainArea = styled.section`
   display: flex;
+  flex: 0 0 auto;
   justify-content: center;
-  padding: 0 15%;
 
   & > div {
     &:first-child {
       position: absolute;
     }
-  }
 
-  & > ${WeatherCardStyled.Wrapper} {
-    margin-left: 5vw;
+    &:last-child {
+      align-items: center;
+      display: flex;
+      flex: 0 0 auto;
+      flex-direction: column;
+      justify-content: flex-end;
+      margin-left: 5vw;
+    }
   }
 `;
 
-export const MainStyled = { MainArea, SearchButton, Subtitle, Title, Wrapper };
+const BlankCard = styled(WeatherCardStyled.Wrapper)`
+  background-color: #d8dee9;
+  height: 315px;
+  width: 346px;
+`;
+
+const CitiesContainer = styled.section`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 40px;
+
+  & > p {
+    color: #4c566a;
+    font-size: 20px;
+    text-align: center;
+    width: 100%;
+  }
+
+  & > ${WeatherCardStyled.Wrapper} {
+    margin-right: 10px;
+    margin-bottom: 16px;
+  }
+`;
+
+export const MainStyled = {
+  BlankCard,
+  CitiesContainer,
+  MainArea,
+  SearchButton,
+  Subtitle,
+  Title,
+  Wrapper,
+};
